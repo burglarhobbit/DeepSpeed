@@ -38,6 +38,8 @@ class MPS_Accelerator(DeepSpeedAccelerator):
                             self.class_dict[member_name] = getattr(module, member_name)
         # end initialize for create_op_builder()
 
+    def device_count(self):
+        return 1
 
     def synchronize(self, device_index=None):
         return torch.mps.synchronize()
