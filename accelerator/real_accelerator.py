@@ -46,6 +46,15 @@ def get_accelerator():
             _validate_accelerator(ds_accelerator)
             return ds_accelerator
 
+        try:
+            from .mps_accelerator import MPS_Accelerator
+        except ImportError as e:
+            pass
+        else:
+            ds_accelerator = MPS_Accelerator()
+            _validate_accelerator(ds_accelerator)
+            return ds_accelerator
+
         from .cuda_accelerator import CUDA_Accelerator
         ds_accelerator = CUDA_Accelerator()
         _validate_accelerator(ds_accelerator)
